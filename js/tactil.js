@@ -14,7 +14,32 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", marcar);
+  var VISTA_FIJA = "width=1280, viewport-fit=cover";
+  var VISTA_ABIERTA = "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover";
+
+  function esTelefono() {
+    var corto = Math.min(global.screen.width, global.screen.height);
+    return EM.tactil && corto < 600;
+  }
+
+  function ajustarVista() {
+    var tel = esTelefono();
+    var vertical = global.matchMedia("(orientation: portrait)").matches;
+    var meta = document.querySelector('meta[name="viewport"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "viewport";
+      document.head.appendChild(meta);
+    }
+    var quiere = tel && !vertical ? VISTA_FIJA : VISTA_ABIERTA;
+    if (meta.getAttribute("content") !== quiere) meta.setAttribute("content", quiere);
+    if (document.body) document.body.classList.toggle("vertical", tel && vertical);
+  }
+
+  ajustarVista();
+  document.addEventListener("DOMContentLoaded", function () { marcar(); ajustarVista(); });
+  global.addEventListener("orientationchange", function () { setTimeout(ajustarVista, 80); setTimeout(ajustarVista, 400); });
+  global.addEventListener("resize", ajustarVista);
   document.addEventListener("visibilitychange", function () { if (!document.hidden) despertar(); });
   document.addEventListener("pointerdown", despertar, { passive: true });
   global.addEventListener("pageshow", despertar);

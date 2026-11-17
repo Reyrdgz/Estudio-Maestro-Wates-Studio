@@ -813,6 +813,8 @@ button, .ficha, .slot, .opcion, .escenario, .claqueta, .intro-encender { -webkit
 .girar-s { font-size: 1rem; margin: 0; color: var(--crema2); }
 @keyframes girar-tel { 0%, 20% { transform: rotate(0deg); } 55%, 80% { transform: rotate(-90deg); } 100% { transform: rotate(0deg); } }
 @media (orientation: portrait) and (max-width: 640px) { #girar { display: flex; } #app, #popover-sonido { visibility: hidden; } }
+body.vertical #girar { display: flex; }
+body.vertical #app, body.vertical #popover-sonido { visibility: hidden; }
 
 @media (hover: none) {
   .opcion:hover, .opcion:focus-visible { transform: none; }
@@ -825,7 +827,7 @@ button, .ficha, .slot, .opcion, .escenario, .claqueta, .intro-encender { -webkit
   #popover-sonido input[type="range"] { height: 2rem; }
 }
 
-@media (orientation: landscape) and (max-height: 520px) {
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 1000px) {
   body { font-size: 14px; }
   #hud { display: flex; align-items: center; gap: 0 0.55rem; padding: 0.25rem 0.6rem; }
   #hud[hidden] { display: none; }
@@ -903,4 +905,41 @@ button, .ficha, .slot, .opcion, .escenario, .claqueta, .intro-encender { -webkit
   #hud .medidor .ico { display: none; }
   #hud .medidor { grid-template-columns: 1fr; grid-template-areas: "val" "bar"; }
   #hud .medidor .val { justify-self: start; }
+}
+
+@media (max-height: 700px) and (min-width: 1001px) {
+  body { font-size: 15px; }
+  #hud { padding: 0.3rem 0.9rem 0.35rem; }
+  .escenario { flex: 0 0 35%; min-height: 0; }
+  .panel { max-height: none; flex: 1 1 0; min-height: 0; padding: 0.7rem 1.3rem 0.6rem; }
+  .panel::before { height: 0.3rem; }
+  .panel h3, .decision h3 { font-size: 1.7rem; margin-bottom: 0.25rem; }
+  .panel p, .contexto, .ayuda { margin-bottom: 0.35rem; line-height: 1.3; }
+  .opciones { gap: 0.35rem; }
+  .opcion { padding: 0.4rem 0.8rem; font-size: 0.95rem; line-height: 1.25; }
+  .opcion .num { width: 1.7rem; height: 1.7rem; font-size: 1.4rem; }
+  .btn, #btn-evidencias, #btn-sonido, #btn-diccionario { min-height: 2.4rem; padding-top: 0.35rem; padding-bottom: 0.35rem; }
+  .dialogo { grid-template-columns: 4.4rem minmax(0, 1fr) auto; gap: 1rem; }
+  .retrato-hablante { width: 4.4rem; height: 4.4rem; }
+  .guion { min-height: 0; font-size: 1.15rem; }
+  .rotulo-ronda h2 { font-size: 1.9rem; }
+  .slot { min-height: 2.5rem; }
+  .ficha { min-height: 2.6rem; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .reloj-num { font-size: 2.8rem; }
+  .tareas li { padding: 0.3rem 0.6rem; }
+  .pantalla-completa { padding: 1rem 1.2rem 1.6rem; }
+  .cartel { padding: 1.1rem 1.4rem; }
+  .corcho { height: calc(100dvh - 2rem); }
+  .foto-sospecha { width: 5rem; }
+  .opcion-acusa { width: 5.4rem; }
+  .escenario { flex-basis: 32%; }
+  .tareas { grid-template-columns: 1fr 1fr; gap: 0.3rem 0.6rem; }
+  .tareas li { padding: 0.2rem 0.5rem; }
+  .sube-baja .btn.mini { min-height: 2rem; padding: 0.15rem 0.5rem; }
+  .opcion-acusa { width: 3.9rem; }
+  .opcion-acusa span { font-size: 0.68rem; }
+  .pista-toggle { padding: 0.2rem 0.5rem; min-height: 0; font-size: 0.76rem; }
+  .pista-toggle + .pista-toggle { margin: 0; }
+  .acusacion h3 { font-size: 1.5rem; }
+  .panel .ayuda { font-size: 0.85rem; }
 }
